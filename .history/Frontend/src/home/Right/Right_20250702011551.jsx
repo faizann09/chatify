@@ -1,0 +1,57 @@
+import Messages from './Messages.jsx'
+import ChatUser from './ChatUser.jsx'
+import Type from './Type.jsx'
+import useConversation from '../../stateManage/useConversation.jsx';
+import { useEffect } from 'react';
+import Loading from '../../component/loading.jsx';
+import { useAuth } from "../../context/AuthProvider.jsx";
+
+export default function Right() {
+    const { selectedConversation, setSelectedConversation } = useConversation();
+    useEffect(() => {
+        return setSelectedConversation(null);
+    }, [setSelectedConversation]);
+    return (
+       <>
+       <div >
+        {!selectedConversation ? (<Nochat/>):(
+             <>
+             {""}
+             <div className=" w-[100%] bg-slate-950 text-white">
+            <ChatUser />
+            <div style={{ maxHeight: "calc(88vh - 8vh)" }} className='overflow-y-auto flex-faizan py-2'>
+                <Messages />
+
+            </div>
+            <Type />
+
+        </div>
+             </>
+        )
+        }
+       </div>
+       </>
+    )
+}
+
+const Nochat =()=>{
+    const {authUser}=useAuth();
+    return(
+        <>
+       <div className="flex flex-col items-center justify-center h-full w-full bg-slate-950 text-white px-4">
+      <div className="text-center">
+        <div className="text-5xl mb-4 animate-bounce">👋</div>
+        <h1 className="text-2xl font-semibold mb-2">Start a Conversation</h1>
+        <p className="text-gray-400">
+          You haven’t sent any messages yet. Type something and say hello!
+        </p>
+        {authUser?.name && (
+          <p className="mt-4 text-sm text-blue-400">
+            Welcome, <span className="font-bold">{authUser.name}</span>
+          </p>
+        )}
+      </div>
+    </div>
+        </>
+    )
+}

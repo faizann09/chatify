@@ -1,0 +1,9 @@
+import 
+
+export default function Messages() {
+    return (
+        <>
+        <Message/>
+        </>
+    )
+}

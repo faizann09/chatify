@@ -1,0 +1,26 @@
+// home/layout/ChatLayout.jsx
+
+import Left from '../Left/Left.jsx';
+import Right from '../Right/Right.jsx';
+import Logout from '../left1/Logout.jsx';
+
+export default function ChatLayout({ selectedUser, setSelectedUser }) {
+  return (
+    <div className="hidden md:flex h-screen w-screen overflow-hidden">
+      {/* Left Sidebar */}
+      <div className="flex flex-col justify-between bg-black text-white w-[30%] min-w-[250px] max-w-[350px] h-full">
+        <div>
+          <Left onUserSelect={setSelectedUser} />
+        </div>
+        <div className="p-2">
+          <Logout />
+        </div>
+      </div>
+
+      {/* Right Chat Panel */}
+      <div className="flex-1 h-full">
+        <Right selectedUser={selectedUser} onBack={() => setSelectedUser(null)} />
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,62 @@
+export default function Login(){
+     return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+            <form className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+                <h1 className="text-blue-400 font-bold text-3xl text-center mb-4">Chatify</h1>
+
+                <h1 className="text-2xl font-semibold mb-6 text-center">
+                    Login to your{" "}
+                    <span className="text-blue-600 font-bold">Account</span>
+                </h1>
+
+                <div className="flex flex-col gap-4">
+
+                    {/* Email */}
+                    <label className="input flex items-center gap-2 border px-3 py-2 rounded">
+                        <svg className="h-5 opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor">
+                                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                            </g>
+                        </svg>
+                        <input
+                            className="flex-1 outline-none"
+                            type="email"
+                            placeholder="mail@site.com"
+                            required
+                        />
+                    </label>
+
+                    {/* Password */}
+                    <label className="input flex items-center gap-2 border px-3 py-2 rounded">
+                        <svg className="h-5 opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor">
+                                <path
+                                    d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"
+                                ></path>
+                                <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                            </g>
+                        </svg>
+                        <input
+                            className="flex-1 outline-none"
+                            type="password"
+                            placeholder="Password"
+                            required
+                            minLength="8"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Must include number, lowercase and uppercase letter"
+                        />
+                    </label>
+
+                    {/* Login Button */}
+                    <button
+                        type="submit"
+                        className="bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition duration-300"
+                    >
+                        Login
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
+}

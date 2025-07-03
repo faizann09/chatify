@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.flex-faizan:: webkit-scrollbar{
+    display: none;
+}
