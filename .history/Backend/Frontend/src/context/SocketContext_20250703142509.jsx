@@ -15,7 +15,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (authUser) {
-      const newSocket = io("https://chatify-tihl.onrender.com", {
+      const newSocket = io("http://localhost:5002", {
         query: {
           userId: authUser.user._id,
         },
