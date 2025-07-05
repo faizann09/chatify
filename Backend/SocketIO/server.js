@@ -7,12 +7,12 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://chatify-tihl.onrender.com", 
+    origin: "https://chatify-tihl.onrender.com",
     methods: ["GET", "POST"],
   },
 });
 
-const users = {}; // userId -> socketId
+const users = {};
 
 export const getReceiverSocketId = (receiverId) => users[receiverId];
 export { app, io, server };
@@ -26,7 +26,6 @@ io.on("connection", (socket) => {
     io.emit("getOnlineUsers", Object.keys(users));
   }
 
-
   socket.on("typing", ({ receiverId }) => {
     const receiverSocketId = users[receiverId];
     if (receiverSocketId) {
@@ -37,11 +36,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log(" Disconnected:", socket.id);
+    console.log("Disconnected:", socket.id);
     if (userId) {
       delete users[userId];
     }
     io.emit("getOnlineUsers", Object.keys(users));
   });
 });
-

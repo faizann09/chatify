@@ -9,24 +9,32 @@ import cookieParser from "cookie-parser";
 import { app, server } from "./SocketIO/server.js";
 
 dotenv.config();
+
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:3000", "https://chatify-tihl.onrender.com"],
+  credentials: true,
+}));
 app.use(cookieParser());
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 10000;
+const HOST = "0.0.0.0";
 const URI = process.env.MONGODB_URI;
 
-try {
-  mongoose.connect(URI);
-  console.log("MongoDB Connected");
-} catch (error) {
-  console.log(error);
-}
+mongoose
+  .connect(URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB Connected"))
+  .catch((error) => {
+    console.error("MongoDB connection error:", error);
+    process.exit(1);
+  });
 
 app.use("/api/user", userRoute);
 app.use("/api/message", messageRoute);
 
-// ✅ Fix for production deployment
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve();
   const frontendPath = path.join(__dirname, "Frontend", "dist");
@@ -38,6 +46,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-server.listen(PORT, () => {
-  console.log(`Server is Running on port ${PORT}`);
+server.listen(PORT, HOST, () => {
+  console.log(`Server is running on http://${HOST}:${PORT}`);
 });
